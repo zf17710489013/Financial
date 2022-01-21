@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矢隆日常报表</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body class="new">
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <div class="chance">
+         期数：
+         <select class="form-control" name="period">
+             <option selected="selected" value=''></option>
+             <option>9</option>
+             <option>12</option>
+         </select> 期</div>
+        <input type="submit" class="btn" style="margin: 3px 20px;">
+    </form>
+    <ul class="movie-list">
+        <table border="1">
+          <tr>
+              <th>日期</th>
+              <th>银行</th>
+              <th>期数</th>
+              <th>累计放款金额</th>
+              <th>累计还款本金</th>
+              <th>当日放款金额</th>
+              <th>当日放款笔数</th>
+              <th>当日还款总额</th>
+              <th>当日还款本金</th>
+              <th>当日还款利息</th>
+              <th>罚息</th>
+              <th>当日还款笔数</th>
+          </tr>
+           {% for movie in movies %}
+              <tr>
+                  <td>{{ movie.date_info }}</td>
+                  <td>{{ movie.product_name }}</td>
+                  <td>{{ movie.period }}</td>
+                  <td>{{ movie.lend_amt }}</td>
+                  <td>{{ movie.total_repay_amt }}</td>
+                  <td>{{ movie.lend_amount }}</td>
+                  <td>{{ movie.lend_number }}</td>
+                  <td>{{ movie.repay_amt }}</td>
+                  <td>{{ movie.repay_amount }}</td>
+                  <td>{{ movie.repay_interest }}</td>
+                  <td>{{ movie.penalty_interest }}</td>
+                  <td>{{ movie.repay_number }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+    </ul>
+    <nav>
+      <ul class="pagination">
+        {% if paginate.has_prev %}
+        <li style="display:inline;"><a href="{{ url_for('blue', page=paginate.prev_num) }}">上一页</a></li>
+        {% else %}
+        <li style="display:inline;" class="disabled"><a href="###">首页</a></li>
+        {% endif %}
+        {% for page in paginate.iter_pages() %}
+            {% if page %}
+                {% if page == paginate.page %}
+                <li style="display:inline;" class="active"><a href="###">{{ page }}</a></li>
+                {% else %}
+                <li style="display:inline;"><a href="{{ url_for('blue', page=page) }}">{{ page}}</a></li>
+                {% endif %}
+            {% else %}
+                <li class="disabled"><a href="#">&hellip;</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if paginate.has_next %}
+        <li style="display:inline;"><a href="{{ url_for('blue', page=paginate.next_num ) }}">下一页</a></li>
+        {% else %}
+        <li style="display:inline;" class="disabled"><a href="###">没有下一页了</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+</body>
+</html>

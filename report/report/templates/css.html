@@ -1,0 +1,43 @@
+<!--左侧导航栏-->
+<div class="main_left">
+	<nav class="nav flex-column navbar-dark bg-dark text-center font-weight-bolder" aria-orientation="vertical">
+		<li><a class="nav-link" href="name.html" target="menuFrame" href="name.html">Name</a></li>
+		<li><a class="nav-link" href="education.html" target="menuFrame">Education</a></li>
+	</nav>
+</div>
+<!--右侧主页-->
+<div>
+	<iframe id="menuFrame" name="menuFrame" src="name.html" style="overflow:visible;"
+            scrolling="yes" frameborder="no" width="80%" height="100%; float:right"></iframe>
+</div>
+
+("li").on('click', function() {
+	 var href = $(this).find("a").attr('href');
+	 $('#mainContents').empty();
+	 $('#mainContents').load("../new/" + href);
+	 //阻止跳转
+	 $(this).parents('li').addClass('active').siblings('li').removeClass('active');
+	 return false;
+});
+
+
+<script>
+    function submit() {
+        var str = document.getElementById("text").value.trim();
+        setInfo(str);
+        document.getElementById("text").value = "";
+    }
+
+    //储存数据
+    function setInfo(name) {
+        var storage = window.sessionStorage;
+        storage.setItem('name', name);
+    }
+
+    //显示数据
+    function show() {
+        var storage = window.sessionStorage;
+        var str = storage.getItem("name");
+        document.getElementById("text").value = str;
+    }
+</script>

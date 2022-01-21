@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矢隆日常报表</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body class="new">
+<form action="{{ url_for('load') }}" method="post" enctype="multipart/form-data">
+        <div class="chance">
+        合作银行:
+            <select class="form-control" name="comp_select1">
+                <option selected="selected" value=''></option>
+                <option>四平</option>
+                <option>蓝海</option>
+                <option>齐商</option>
+                <option>兰州</option>
+                <option>威海</option>
+                <option>长发展</option>
+            </select>
+        </div>
+    <div class="chance">
+            合作产品名称:
+            <select class="form-control" name="comp_select2">
+                <option selected="selected" value=''></option>
+                <option>四平-信用飞</option>
+                <option>四平-快牛</option>
+                <option>四平-绿信</option>
+                <option>四平-全民钱包</option>
+                <option>蓝海-信用飞</option>
+                <option>齐商-信用飞</option>
+                <option>齐商-我来贷</option>
+                <option>兰州-信用飞</option>
+                <option>威海-信用飞</option>
+                <option>长发展-绿信</option>
+                <option>长发展-信用飞</option>
+                <option>长发展-全民钱包</option>
+            </select>
+        </div>
+<!--    <div class="chance">-->
+<!--          融担:-->
+<!--            <select class="form-control" name="comp_select3">-->
+<!--                <option selected="selected" value=''></option>-->
+<!--                <option>花旗</option>-->
+<!--                <option>经协</option>-->
+<!--                <option>大秦</option>-->
+<!--            </select>-->
+<!--        </div>-->
+        <input type="submit" class="btn" style="margin: 3px 20px;">
+    </form>
+    <ul class="movie-list">
+            <table border="1">
+              <tr>
+                  <th>日期</th>
+                  <th>合作产品名称</th>
+                  <th>当日还款总额</th>
+                  <th>当日还款本金</th>
+                  <th>当日还款利息</th>
+                  <th>当日还款笔数</th>
+                  <th>提前结清笔数</th>
+                  <th>提前结清金额</th>
+                  <th>当日放款金额</th>
+                  <th>当日放款笔数</th>
+              </tr>
+               {% for movie in movies %}
+                  <tr>
+                      <td>{{ movie.date_info }}</td>
+                      <td>{{ movie.product_name }}</td>
+                      <td>{{ movie.repay_amount }}</td>
+                      <td>{{ movie.repay_principal }}</td>
+                      <td>{{ movie.repay_interest }}</td>
+                      <td>{{ movie.repay_number }}</td>
+                      <td>{{ movie.advance_settlement }}</td>
+                      <td>{{ movie.advance_amount }}</td>
+                      <td>{{ movie.lend_amount }}</td>
+                      <td>{{ movie.lend_number }}</td>
+                  </tr>
+                {% endfor %}
+            </table>
+        </ul>
+    <nav>
+          <ul class="pagination">
+            {% if paginate.has_prev %}
+            <li style="display:inline;"><a href="{{ url_for('content', page=paginate.prev_num) }}">上一页</a></li>
+            {% else %}
+            <li style="display:inline;" class="disabled"><a href="###">没有上一页了</a></li>
+            {% endif %}
+            {% for page in paginate.iter_pages() %}
+                {% if page %}
+                    {% if page == paginate.page %}
+                    <li style="display:inline;" class="active"><a href="###">{{ page }}</a></li>
+                    {% else %}
+                    <li style="display:inline;"><a href="{{ url_for('content', page=page) }}">{{ page}}</a></li>
+                    {% endif %}
+                {% else %}
+                    <li class="disabled"><a href="#">&hellip;</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if paginate.has_next %}
+            <li style="display:inline;"><a href="{{ url_for('content', page=paginate.next_num ) }}">下一页</a></li>
+            {% else %}
+            <li style="display:inline;" class="disabled"><a href="###">没有下一页了</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+</body>
+</html>

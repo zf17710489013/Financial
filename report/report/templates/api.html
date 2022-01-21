@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>接口文档</title>
+</head>
+<body>
+    <div class="box">
+        <h3>入参</h3>
+        <b class="form">
+        {
+    "lenderCode": "QS",
+    "productMappingCode": ["PW0000001"],
+    "signingPrescription": "91610102096662200H"
+  }
+        </b>
+    </div><hr>
+    <div class="box">
+        <h3>1.产品列表</h3>
+        <p>路径：/report/product/<p>
+        <p>方法：get/post<p>
+        <div class="form">
+        返回数据：
+        [{
+    "extraInfo": "我来数科",
+    "id": 8,
+    "lenderCode": "QS",
+    "lenderProductName": "齐商银行",
+    "productMappingCode": "PW0000001",
+    "productName": "我来数科-齐商银行",
+    "productRemark": "wldqs",
+    "signingMode": "陕西经济协作融资担保有限公司",
+    "signingPrescription": "91610102096662200H"
+  }]
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>2.运营日报</h3>
+        <p>路径：/report/daily/<p>
+        <p>方法：get/post<p>
+        <b>新增参数：page,pageNumber,startDay,endDay</b>
+        <div class="form">
+    {
+  "data": [
+      {
+    "advanceAmount": 提前结清金额,
+    "advanceSettlement": 提前结清笔数,
+    "dateInfo": "日期",
+    "extraInfo": "资产方",
+    "entries": 进件笔数,
+    "creditNumber": 成功授信笔数,
+    "applyLendNumber": 申请放款笔数,
+    "applyLendAmount": 申请放款金额,
+    "lendAmount": 成功放款金额(当日放款金额),
+    "lendNumber": 成功放款笔数(当日放款笔数),
+    "creditPercent": 授信通过率,
+    "lendPercent": 放款通过率,
+    "lenderCode": 资金机构,
+    "productMappingCode": 产品映射代码,
+    "productName": 产品名称,
+    "repayAmount": 当日还款总额,
+    "repayInterest": 当日还款利息,
+    "repayNumber": 当日还款笔数,
+    "repayPrincipal": 当日还款本金,
+    "signingPrescription": 融担
+  }],
+  "page": 1,
+  "total": 1
+}
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>3.还款明细</h3>
+        <p>路径：/report/repay/<p>
+        <p>方法：get/post<p>
+        <b>新增参数：page,pageNumber,startDay,endDay, repayType, loanNo</b>
+        <b>备注：0:线上还款,1:线下还款</b>
+        <div class="form">
+    {
+  "data": [
+      {
+     "currentNumber": 当前期次,
+      "extraInfo": 资产方,
+      "lenderCode": 资金机构,
+      "loanAmt": 借款总额,
+      "loanNo": 借据号,
+      "name": 客户姓名,
+      "processDate": 银行确认还款日期,
+      "productMappingCode": 产品映射代码,
+      "productName": 产品名称,
+      "remainAmt": 借款余额,
+      "repayCapital": 还款本金,
+      "repayDate": 应还日期,
+      "repayInterest": 还款利息,
+      "repayOverFee": 扣款罚息,
+      "repayType": 还款类型,
+      "repayMethod": 还款方式标志,
+      "signingPrescription": 融担,
+      "totalNumber": 总期次
+  }],
+  "page": 1,
+  "total": 3345
+}
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>4.数据大盘-总额</h3>
+        <p>路径：/report/market/<p>
+        <p>方法：get/post<p>
+        <div class="form">
+    {
+  "dateInfo": 当日日期,
+  "todayLendNumber": 今日放款笔数,
+  "todayTotalEntries": 今日进件笔数,
+  "todayTotalLendAmount": 今日放款总额,
+  "totalEntries": 总进件笔数,
+  "totalLendAmount": 总放款金额,
+  "totalLendNumber": 今日放款笔数,
+  "totalLoanBalance": 当前贷款余额
+}
+
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>5.数据大盘-统计</h3>
+        <p>路径：/report/statistics/<p>
+        <p>方法：get/post<p>
+    <b>新增参数：startDay,endDay</b>
+        <div class="form">
+            {
+  "totalLendAmount": 放款金额,
+  "totalLendNumber": 放款笔数,
+  "totalRepayAmount": 还款金额,
+  "totalStatistics": [
+    {
+      "value": 该产品的放款金额/总放款金额,
+      "name": 此时间段内发生放款的产品映射
+    }
+  ]
+}
+
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>6.数据大盘-地区</h3>
+        <p>路径：/report/area/<p>
+        <p>方法：get/post<p>
+    <b>新增参数：page,pageNumber,startDay,endDay</b>
+        <div class="form">
+            {
+  "data": [
+    {
+      "customerNo": 客户数,
+      "province": 省份
+    }
+  ],
+  "page": 1,
+  "total": 34
+}
+
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>6.数据大盘-资产方排行</h3>
+        <p>路径：/report/assets/<p>
+        <p>方法：get/post<p>
+    <b>新增参数：page,pageNumber,startDay,endDay</b>
+        <div class="form">
+            {
+  "data": [
+    {
+      "lendAmount": 统计时间段内的放款总金额,
+      "lendNumber": 统计时间段内的放款总笔数,
+      "assets": 资产方
+    }
+  ],
+  "page": 1,
+  "total": 34
+}
+
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>7.数据大盘-资金机构排行</h3>
+        <p>路径：/report/lender/<p>
+        <p>方法：get/post<p>
+    <b>新增参数：page,pageNumber,startDay,endDay</b>
+        <div class="form">
+            {
+  "data": [
+    {
+      "bank": 银行,
+      "lendAmount": 统计时间段内的放款总金额,
+      "lendNumber": 统计时间段内的放款总笔数
+    }
+  ],
+  "page": 1,
+  "total": 34
+}
+
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>8.产品统计报表</h3>
+        <p>路径：/report/limitation/<p>
+        <p>方法：get/post<p>
+    <b>新增参数：page,pageNumber</b>
+        <div class="form">
+            {
+  "data": [
+     {
+      "productLimitation": 产品配置额度,
+      "productLimitationLeft": 可使用额度,
+      "productName": 产品名称,
+      "status": 产品状态,
+      "totalLendAmount": 总放款额度,
+      "totalLendNumber": 总放款笔数,
+      "totalLoanBalance": 当前在贷余额
+    }
+  ],
+  "page": 1,
+  "total": 34
+}
+
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>9.数据统计-还款</h3>
+        <p>路径：/report/payback/<p>
+        <p>方法：get/post<p>
+    <b>新增参数：startDay,endDay</b>
+        <div class="form">
+            {
+      "totalRepayAmount": 还款,
+}
+
+        </div>
+    </div><hr>
+    <div class="box">
+        <h3>10.扣款数据</h3>
+        <p>路径：/report/deduction/<p>
+        <p>方法：get/post<p>
+        <b>新增参数：page,pageNumber,startDay,endDay</b>
+        <div class="form">
+    { "data":
+        [ { "dateInfo": 日期,
+        "extraInfo": 资产方,
+        "lenderCode": 资金机构,
+        "productMappingCode": 产品映射代码,
+        "channel": 渠道,
+        "productName": 产品名称,
+        "deductionAmt": 扣款总额,
+        "totalNumber": 扣款笔数 }],
+        "page": 1,
+        "total": 1
+        }
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>11.还款日报表</h3>
+        <p>路径：/report/debt/<p>
+        <p>方法：get/post<p>
+        <b>新增参数：page,pageNumber,startDay,endDay, repayType, repayMethod, period</b>
+        <div class="form">
+    {
+  "data": [
+      {
+      "dateInfo": 日期,
+      "bank": 资金机构,
+      "assets": 资产方,
+      "productCode": 产品编号,
+      "productName": 合作产品名称,
+      "repayType": 还款类型,
+      "period": 期数,
+      "repayMethod": 还款方式标记,
+      "repayNumber": 还款笔数,
+      "repayAmount": 还款总额,
+      "repayPrincipal": 还款本金,
+      "repayInterest": 还款利息,
+      "repayOverFee": 还款罚息,
+      "totalRepayNumber": 累计还款笔数,
+      "totalRepayAmount": 累计还款总额,
+      "totalRepayPrincipal": 累计还款本金,
+      "totalRepayInterest": 累计还款利息
+  }],
+  "page": 1,
+  "total": 3345
+}
+        </div>
+    </div><hr>
+<div class="box">
+        <h3>12.客户进件数据</h3>
+        <p>路径：/report/event/<p>
+        <p>方法：get/post<p>
+        <b>新增参数：page,pageNumber,startDay,endDay</b>
+        <div class="form">
+    {
+  "data": [
+      {
+      "productName": 合作产品名称,
+      "name": 客户姓名,
+      "eventTime": 进件时间,
+      "applyAmount": 申请金额,
+      "period": 借款期限,
+      "bank": 资金方,
+      "status": 进件状态,
+      "successTime": 资方处理完成时间,
+      "feedBack": 资方反馈信息,
+      "creditAmount": 资方授信金额,
+      "lendTime": 资方放款时间,
+      "lendAmount": 资方放款金额,
+      "applyStatus": 放款状态,
+      "applyReason": 放款失败原因,
+      "productCode": 产品编号,
+      "creditApplyId": 授信申请编号,
+      "actualPeriod": 实际放款期限,
+  }],
+  "page": 1,
+  "total": 3345
+}
+        </div>
+    </div><hr>
+</body>
+</html>

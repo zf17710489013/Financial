@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>js改变html的内容</title>
+<!-- 不能把JavaScript写在这个头部来改变html的内容-->
+</head>
+
+<body>
+<!-- 不能把JavaScript写在定义pid的前面来改变html的内容-->
+<p id="pid">Hello Html!</p>
+<script type="text/javascript">
+    document.getElementById("pid").innerHTML="绝地反击";//js改变html的内容
+</script>
+</body>
+</html>

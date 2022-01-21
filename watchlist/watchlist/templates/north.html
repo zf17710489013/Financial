@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="inside">
+    <p class="search">{{ movies|length }}条记录</p>
+    <ul class="north-list">
+        <table border="1">
+          <tr>
+              <th>日期</th>
+            <th>产品</th>
+            <th>笔数</th>
+          </tr>
+           {% for movie in movies %}
+              <tr>
+                  <td>{{ movie.date_time }}</td>
+                  <td>{{ movie.product_name }}</td>
+                  <td>{{ movie.number }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+    </ul>
+    <nav>
+      <ul class="pagination">
+        {% if paginate.has_prev %}
+        <li style="display:inline;"><a href="{{ url_for('north', page=paginate.prev_num) }}">上一页</a></li>
+        {% else %}
+        <li style="display:inline;" class="disabled"><a href="###">没有上一页了</a></li>
+        {% endif %}
+        {% for page in paginate.iter_pages() %}
+            {% if page %}
+                {% if page == paginate.page %}
+                <li style="display:inline;" class="active"><a href="###">{{ page }}</a></li>
+                {% else %}
+                <li style="display:inline;"><a href="{{ url_for('north', page=page) }}">{{ page}}</a></li>
+                {% endif %}
+            {% else %}
+                <li class="disabled"><a href="#">&hellip;</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if paginate.has_next %}
+        <li style="display:inline;"><a href="{{ url_for('north', page=paginate.next_num ) }}">下一页</a></li>
+        {% else %}
+        <li style="display:inline;" class="disabled"><a href="###">没有下一页了</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+</div>
+
+<img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}">
+{% endblock %}

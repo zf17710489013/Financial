@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矢隆日常报表</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body class="new">
+    <form action="{{ url_for('pay') }}" method="post" enctype="multipart/form-data">
+        <div class="chance">
+         还款类型：
+         <select class="form-control" name="repay_type">
+             <option selected="selected" value=''></option>
+             <option>正常还款</option>
+             <option>当期代偿</option>
+             <option>全额代偿</option>
+<!--             <option>提前结清</option>-->
+         </select></div>
+        <input type="submit" class="btn" style="margin: 3px 20px;">
+    </form>
+    <ul class="movie-list">
+        <table border="1">
+          <tr>
+              <th>日期</th>
+              <th>银行</th>
+              <th>资产方</th>
+              <th>产品编码</th>
+              <th>产品名称</th>
+              <th>还款类型</th>
+              <th>当日还款笔数</th>
+              <th>当日还款总额</th>
+              <th>当日还款本金</th>
+              <th>当日还款利息</th>
+              <th>累计还款总额</th>
+              <th>累计还款笔数</th>
+          </tr>
+           {% for movie in movies %}
+              <tr>
+                  <td>{{ movie.date_info }}</td>
+                  <td>{{ movie.bank }}</td>
+                  <td>{{ movie.assets }}</td>
+                  <td>{{ movie.product_code }}</td>
+                  <td>{{ movie.product_name }}</td>
+                  <td>{{ movie.repay_type }}</td>
+                  <td>{{ movie.repay_number }}</td>
+                  <td>{{ movie.repay_amount }}</td>
+                  <td>{{ movie.repay_principal }}</td>
+                  <td>{{ movie.repay_interest }}</td>
+                  <td>{{ movie.total_repay_amount }}</td>
+                  <td>{{ movie.total_repay_number }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+    </ul>
+    <nav>
+      <ul class="pagination">
+        {% if paginate.has_prev %}
+        <li style="display:inline;"><a href="{{ url_for('repay', page=paginate.prev_num) }}">上一页</a></li>
+        {% else %}
+        <li style="display:inline;" class="disabled"><a href="###">首页</a></li>
+        {% endif %}
+        {% for page in paginate.iter_pages() %}
+            {% if page %}
+                {% if page == paginate.page %}
+                <li style="display:inline;" class="active"><a href="###">{{ page }}</a></li>
+                {% else %}
+                <li style="display:inline;"><a href="{{ url_for('repay', page=page) }}">{{ page}}</a></li>
+                {% endif %}
+            {% else %}
+                <li class="disabled"><a href="#">&hellip;</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if paginate.has_next %}
+        <li style="display:inline;"><a href="{{ url_for('repay', page=paginate.next_num ) }}">下一页</a></li>
+        {% else %}
+        <li style="display:inline;" class="disabled"><a href="###">没有下一页了</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+</body>
+</html>

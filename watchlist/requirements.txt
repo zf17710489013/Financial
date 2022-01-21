@@ -1,0 +1,15 @@
+Click
+coverage
+Flask
+Flask-Login
+Flask-SQLAlchemy
+itsdangerous
+Jinja2
+MarkupSafe
+python-dotenv
+SQLAlchemy
+Werkzeug
+pymysql
+flask-paginate
+pymongo
+Flask-Excel
